@@ -970,8 +970,10 @@ function M._Level2(self, sn, entryA, possibleA)
          for j = 1, #entryT.parentAA do
             local parentA = entryT.parentAA[j]
             for i = 1, #parentA do
-               b[#b+1] = parentA[i]
-               b[#b+1] = '  '
+                if show_hidden or not parentA[i]:find("cluster/%.") then
+                    b[#b+1] = parentA[i]
+                    b[#b+1] = '  '
+                end
             end
             b[#b] = "\n      "
          end
