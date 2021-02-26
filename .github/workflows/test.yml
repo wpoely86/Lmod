@@ -32,9 +32,6 @@ jobs:
          cd -
       - name: Run tests
         run: tm
-        env:
-          # make sure the end2end finds tcl.h
-          CFLAGS: -I/usr/include/tcl8.6
       - name: show output of failed tests
         if: ${{ failure() }}
         run: |
@@ -56,6 +53,8 @@ jobs:
       steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: install dependencies
+        run: brew install coreutils
       - name: set up lua
         uses: leafo/gh-actions-lua@v8.0.0
         with:
@@ -76,9 +75,6 @@ jobs:
          cd -
       - name: Run tests
         run: tm
-        env:
-          # make sure the end2end finds tcl.h
-          CFLAGS: -I/usr/include/tcl8.6
       - name: show output of failed tests
         if: ${{ failure() }}
         run: |
